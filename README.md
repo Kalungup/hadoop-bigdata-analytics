@@ -1,38 +1,29 @@
-# 🛠️ Hadoop Big Data Analytics
+# bigdata-mapreduce-shapes
 
-This project contains Hadoop MapReduce programs for text analytics, including:
+# Hadoop MapReduce – Shape Frequency Counter
+### Hadoop Streaming MapReduce to count shapes (Big Data assignment)
+This project runs a Hadoop Streaming MapReduce job to count the frequency of shapes in a dataset of 100,000 records.
 
-- Word Count
-- Word Standard Deviation
-- Unique word extraction
-- Frequency analysis
+## Files
 
-## 📂 Repository Structure
-data/             → Input text files  
-src/              → Source code for MapReduce jobs  
-jar/              → Compiled JAR files  
-output/           → Hadoop output directory (ignored from Git)
+- `mapper.py` – reads shapes (one per line) and emits `<shape> 1`
+- `reducer.py` – sums counts per shape and outputs `<shape> total_count`
+- `shapes_result.txt` – final frequencies from the Hadoop job
 
-## 🚀 Run Hadoop Jobs
+## Technologies
 
-### 1️⃣ Upload data to HDFS
-hadoop fs -mkdir -p /user/pascal/input
-hadoop fs -put data/*.txt /user/pascal/input
+- Hadoop HDFS
+- Hadoop Streaming
+- Python (mapper & reducer)
+- Linux shell / Zeppelin
 
-### 2️⃣ Word Count
-hadoop jar jar/WordCount.jar wordcount.WordCount /user/pascal/input /user/pascal/output_wc
-hadoop fs -cat /user/pascal/output_wc/part-r-00000
+## Final Output (100,000 shapes)
 
-### 3️⃣ Word Standard Deviation
-hadoop jar jar/WordStandardDeviation.jar wordstandarddeviation.WordSD /user/pascal/input /user/pascal/output_sd
-hadoop fs -cat /user/pascal/output_sd/part-r-00000
+- circle: 6,973  
+- diamond: 10,153  
+- pentagon: 25,145  
+- square: 12,966  
+- star: 4,963  
+- triangle: 39,800
 
-## 🧰 Tech Stack
-- Hadoop 3.x
-- HDFS
-- Java MapReduce (or Python streaming)
-- Linux / Ubuntu (DSV VM)
-
-## 👤 Author
-Pascal Kalungu  
-Technical Project Manager | Data Engineering | Big Data | AI
+This totals to 100,000, indicating that our Map-reducers are working correctly
